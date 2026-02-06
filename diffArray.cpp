@@ -45,24 +45,24 @@ bool isPrime(int n) {if (n <= 1) return false;if (n == 2) return true;if (n % 2 
 
 
 void solve(){
-    int n, q; cin>>n>>q;
-    vector<int> final(n),D(n+1);
+    int n, q; 
+    cin>>n>>q;
 
+    vector<int> final(n), D(n+1, 0);
 
-    while(q--){
-        int l, r, val; cin>>l>>r>>val;
-
-        D[l] += val;
-        if(r + 1 < n) D[r + 1] -= val;
+    while (q--) {
+        int l, r, val; 
+        cin>>l>>r>>val;
+        l--; r--;
+        D[l] += 1;
+        D[r + 1] -= 1;
     }
-
     final[0] = D[0];
-
-    for(int i = 1;i<n;++i){
+    for (int i = 1; i < n; ++i) {
         final[i] = final[i - 1] + D[i];
     }
 
-
+    
 
     // final difference array (0 based);
     for(auto e : final) cout<<e<<" ";
@@ -89,4 +89,5 @@ int32_t main() {
         solve();
         cout << endl;
     }
+
 }
